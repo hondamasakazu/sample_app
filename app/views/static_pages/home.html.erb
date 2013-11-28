@@ -3,11 +3,11 @@
   <h1>Welcome to the Future-Commynity</h1>
   <h2>
     This is the Home page for the
-    <a href="http://railstutorial.jp/">Network Solution Group</a>
+    <%= link_to "Network Solution Group", root_path %>
     sample application.
   </h2>
 
   <%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>
 </div>
 
-<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<%= link_to image_tag("rails.png", alt: "Rails"), root_path %>
