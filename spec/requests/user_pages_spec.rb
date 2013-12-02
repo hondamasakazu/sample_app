@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "UserPages" do
+
   describe "GET /user_pages" do
   	subject { page }
   	describe "signup page" do
