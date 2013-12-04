@@ -28,6 +28,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     awesome_print (1.2.0)
+    bcrypt-ruby (3.1.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.2.0)
@@ -226,6 +227,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  bcrypt-ruby (~> 3.1.2)
   bootstrap-sass (= 2.3.2.0)
   capybara (= 2.1.0)
   childprocess (= 0.3.9)
