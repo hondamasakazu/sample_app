@@ -9,6 +9,8 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # Use sqlite3 as the database for Active Record
 group :development, :test do
   gem 'sqlite3'
+
+  # 振舞駆動テスティングフレームワーク
   gem 'rspec-rails', '2.13.1'
 
   # Guardによるテストの自動化
@@ -18,15 +20,24 @@ group :development, :test do
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.9'
+
 end
 
 group :test do
   gem 'selenium-webdriver', '2.35.1'
+
+  # Webのアクセスをシミュレートするヘルパー
   gem 'capybara', '2.1.0'
   # Uncomment this line on OS X.
   gem 'growl', '1.0.3'
 
+  # スタブ生成ライブラリー
   gem 'factory_girl_rails', '4.2.1'
+
+  # 受け入れテストのためのテスティングフレームワーク
+  gem 'cucumber-rails', '1.4.0', :require => false
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
+
   # Uncomment these lines on Linux.
   # gem 'libnotify', '0.8.0'
 
