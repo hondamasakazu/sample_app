@@ -24,9 +24,26 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  # 成りすましチェック
+  def current_user?(user)
+    user == current_user
+  end
+
   # ログアウト
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)
   end
+
+  # フレンドリーフォワーディング
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  # フレンドリーフォワーディング
+  def store_location
+    session[:return_to] = request.url
+  end
+
 end

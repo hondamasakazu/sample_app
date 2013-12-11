@@ -6,12 +6,22 @@ gem 'rails', '4.0.1'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby', '~> 3.1.2'
 
+# データ生成用
+gem 'faker', '1.1.2'
+
+# ページネーション
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.6'
+
 # Use sqlite3 as the database for Active Record
 group :development, :test do
   gem 'sqlite3'
 
   # 振舞駆動テスティングフレームワーク
   gem 'rspec-rails', '2.13.1'
+
+  # Rspec出力結果整形
+  gem 'fuubar'
 
   # Guardによるテストの自動化
   gem 'guard-rspec', '2.5.0'

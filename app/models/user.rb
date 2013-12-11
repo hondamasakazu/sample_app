@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 	validates :email, presence: true,
 		format: { with:VALID_EMAIL_REGEX },
 		uniqueness: { case_sensitive: false }
-	has_secure_password
+	has_secure_password # このメソッドは"authenticate"認証メソッドを提供する。
 	validates :password, length: { minimum: 6 }
 
   # ランダム文字列生成
@@ -21,7 +21,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
     # ユーザートークンを生成
     def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)
