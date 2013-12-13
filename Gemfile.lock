@@ -35,6 +35,9 @@ GEM
     atomic (1.1.14)
     awesome_print (1.2.0)
     bcrypt-ruby (3.1.2)
+    better_errors (1.0.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.2.0)
@@ -165,6 +168,8 @@ GEM
     pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -265,6 +270,8 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bcrypt-ruby (~> 3.1.2)
+  better_errors
+  binding_of_caller
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.6)
   capybara (= 2.1.0)
@@ -291,6 +298,7 @@ DEPENDENCIES
   pry-rails
   pry-remote
   pry-stack_explorer
+  quiet_assets
   rails (= 4.0.1)
   rails_12factor (= 0.0.2)
   rspec-rails (= 2.13.1)
