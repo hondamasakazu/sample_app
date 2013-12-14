@@ -17,31 +17,31 @@ describe User do
   it { should be_valid }
   it { should_not be_admin }
 
-  describe "with admin attribute set to 'true'" do
+  describe "ADMIN属性'true'" do
     before do
       @user.save!
-      @user.toggle!(:admin)
+      @user.toggle!(:admin) # 属性を反転させる
     end
 
     it { should be_admin }
   end
 
-  describe "when name is not present" do
+  describe "名前が存在しない場合" do
   	before { @user.name = " "}
   	it { should_not be_valid }
   end
 
-  describe "when email is not present" do
+  describe "emailが存在しない場合" do
   	before { @user.email = " "}
   	it { should_not be_valid }
   end
 
-  describe "when name is too long" do
+  describe "名前のLegthチェック" do
   	before { @user.name = "a" * 31}
   	it { should_not be_valid }
   end
 
-  describe "when email format is invalid" do
+  describe "Mailフォーマット：系" do
 
     it "should invalid" do
       addresses = %w[
@@ -59,7 +59,7 @@ describe User do
 
   end
 
-  describe "when email format is valid" do
+  describe "Mailフォーマット：正常系" do
     it "should valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
@@ -69,7 +69,7 @@ describe User do
     end
   end
 
-  describe "whn email addresses is already taken" do
+  describe "mail重複チェック（upcase）" do
     before do
       user_with_same_email = @user.dup
       user_with_same_email.email = @user.email.upcase
@@ -78,7 +78,7 @@ describe User do
     it { should_not be_valid}
   end
 
-  describe "when password is not present" do
+  describe "パスワードがブランク" do
     before do
       @user =  User.new(name: "Example User", email: "user@example.com",
                     password: " ", password_confirmation: " ")
@@ -86,25 +86,25 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "when password doesn'n match comfirmation" do
+  describe "パスワードとコンファームのミスマッチ" do
     before { @user.password_confirmation = "mismatch" }
     it { should_not be_valid }
   end
 
-  describe "with a password that's too short" do
+  describe "パスワード最小値" do
     before { @user.password = @user.password_confirmation = "a" * 5 }
     it { should be_invalid }
   end
 
-  describe "return value of authenticate method" do
+  describe "ユーザー情報保存" do
     before { @user.save }
     let(:found_user) { User.find_by(email: @user.email) }
 
-    describe "with valid password" do
+    describe "パスワード認証メソッド確認" do
       it { should eq found_user.authenticate(@user.password) }
     end
 
-    describe "with invalid password" do
+    describe "パスワード認証メソッド確認：エラー" do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
       it { should_not eq user_for_invalid_password }
@@ -112,7 +112,7 @@ describe User do
     end
   end
 
-  describe "email address with mixed case" do
+  describe "アドレスのlower-case保存確認" do
     let(:mixed_case_email) { "Foo@ExAMPle.coM" }
 
     it "should be saved as all lower-case" do
@@ -122,7 +122,7 @@ describe User do
     end
   end
 
-  describe "remember token" do
+  describe "remember token発行確認" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
   end

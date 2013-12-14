@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update]
   before_action :correct_user,   only: [:edit, :update]
+  before_action :signed_in,      only: [:new, :create]
   before_action :admin_user,     only: :destroy
 
   # ユーザー一覧
@@ -81,6 +82,10 @@ class UsersController < ApplicationController
 
     def admin_user
       redirect_to(root_path) unless current_user.admin?
+    end
+
+    def signed_in
+      redirect_to(root_path) if signed_in?
     end
 
 end

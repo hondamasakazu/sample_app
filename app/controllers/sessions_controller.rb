@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 		user = User.find_by(email: params[:session][:email].downcase)
 		if user && user.authenticate(params[:session][:password])
 			sign_in user #sign_in 関数の呼び出し
-			redirect_back_or user
+			redirect_back_or user # SessionからリダイレクトURL取得
 		else
 			flash.now[:error] = 'Invalid email/password combination'
 			render 'new'

@@ -16,8 +16,13 @@ describe "Authentication" do
       describe "認証エラー後、ホーム画面にエラー文字列が表示されないことを確認" do
         before { click_link "Home" }
         it { should_not have_selector('div.alert.alert-error') }
+        it { should_not have_link('Users') }
+        it { should_not have_link('Profile') }
+        it { should_not have_link('Settings') }
+        it { should_not have_link('Sign out',    href: signout_path) }
+        it { should have_link('Sign in', href: signin_path) }
       end
-    end # "サインイン画面 異常系" end
+    end
 
     describe "ログイン成功後に表示されるユーザー情報画面の各リンクの表示確認" do
       let(:user) { FactoryGirl.create(:user) }
@@ -30,21 +35,21 @@ describe "Authentication" do
       it { should have_link('Sign out',    href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
     end
-  end # "サインイン画面" end
+  end
 
   describe "サインイン画面 正常系" do
 
-    describe "for non-signed-in users" do
+    describe "認証前（ログイン前）" do
       let(:user) { FactoryGirl.create(:user) }
 
-      describe "サインイン後の動作確認" do
+      describe "未ログイン状態で各アクションを確認" do
 
-        describe "visiting the user index" do
+        describe "ユーザー一覧のパスを指定するがログインしてないので、ログイン画面を表示" do
           before { visit users_path }
           it { should have_title('Sign in') }
         end
 
-        describe "when attempting to visit a protected page" do
+        describe "保護されたページを訪問する（フレンドリーフォワーディング）" do
           before do
             visit edit_user_path(user)
             fill_in "Email",    with: user.email
@@ -52,47 +57,52 @@ describe "Authentication" do
             click_button "Sign in"
           end
 
-          describe "after signing in" do
-
-            it "should render the desired protected page" do
+          describe "ログイン前に指定した画面（ユーザー情報編集）への画面遷移確認" do
+            it "レンダリング結果" do
               expect(page).to have_title('Edit user')
             end
           end
         end
 
-        describe "ユーザー情報編集画面遷移の確認" do
+        describe "ユーザー情報編集のパスを指定するが（ログインしてないのでログイン画面へ" do
           before { visit edit_user_path(user) }
           it { should have_title('Sign in') }
         end
 
-        describe "ユーザー情報更新時のリダイレクト先の確認" do
+        describe "ユーザー情報更新時のリダイレクト先の確認（ログイン前）" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
         end
-      end # "サインイン後の動作確認" end
+      end
 
-      describe "サインイン時に生成されたセッション情報とは違うユーザーでユーザー情報を更新した場合の確認" do
+      describe "ユーザー情報の偽装" do
         let(:user) { FactoryGirl.create(:user) }
         let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
         before { sign_in user, no_capybara: true }
 
-        describe "submitting a GET request to the User#edit action" do
+        describe "偽装したユーザー情報で編集アクションにGET(取得）リクエストを送信する" do
+          before { get edit_user_path(wrong_user) }
+          specify { expect(response.body).not_to match(full_title('Edit user')) }
+          specify { expect(response).to redirect_to(root_url) }
+        end
+
+        describe "偽装したユーザー情報で編集アクションにPATCH(更新）リクエストを送信する" do
           before { patch user_path(wrong_user) }
           specify { expect(response).to redirect_to(root_path) }
         end
       end
-    end # "for non-signed-in users" end
+    end
 
-    describe "as non-admin user" do
+    describe "管理者権限以外のユーザーとしてログイン" do
       let(:user) { FactoryGirl.create(:user) }
       let(:non_admin) { FactoryGirl.create(:user) }
 
       before { sign_in non_admin, no_capybara: true }
 
-      describe "submitting a DELETE request to the Users#destroy action" do
+      describe "管理者権限以外のユーザーユーザーへのDELETE要求を送信＃" do
         before { delete user_path(user) }
         specify { expect(response).to redirect_to(root_path) }
       end
-    end # "as non-admin user" end
-  end # "サインイン画面 正常系" end
+    end
+  end
 end
