@@ -29,29 +29,29 @@ describe "UserPages" do
     end
 
     describe "delete links" do
-        let(:user) { FactoryGirl.create(:user) }
-        before(:each) do
-          sign_in user
+      let(:user) { FactoryGirl.create(:user) }
+      before(:each) do
+        sign_in user
+        visit users_path
+      end
+      it { should_not have_link('delete') }
+
+      describe "Adminユーザーで認証" do
+        let(:admin) { FactoryGirl.create(:admin) }
+        before do
+          sign_in admin
           visit users_path
         end
-        it { should_not have_link('delete') }
 
-        describe "Adminユーザーで認証" do
-          let(:admin) { FactoryGirl.create(:admin) }
-          before do
-            sign_in admin
-            visit users_path
-          end
-
-          it { should have_link('delete', href: user_path(User.first)) }
-          it "Adminユーザーでユーザー削除確認" do
-            expect do
-              click_link('delete', match: :first)
-            end.to change(User, :count).by(-1)
-          end
-          it { should_not have_link('delete', href: user_path(admin)) }
+        it { should have_link('delete', href: user_path(User.first)) }
+        it "Adminユーザーでユーザー削除確認" do
+          expect do
+            click_link('delete', match: :first)
+          end.to change(User, :count).by(-1)
         end
+        it { should_not have_link('delete', href: user_path(admin)) }
       end
+    end
   end
 
   describe "signup page" do

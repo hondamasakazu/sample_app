@@ -15,3 +15,9 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+$(function(){
+    $('#micropost_content').bind('keyup',function(){
+        var thisValueLength = $(this).val().length;
+        $('.micro_post_count').html(thisValueLength);
+    });
+});
