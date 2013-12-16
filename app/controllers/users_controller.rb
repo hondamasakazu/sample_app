@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   # アカウント情報表示画面
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   # アカウント登録画面表示
@@ -59,21 +60,6 @@ class UsersController < ApplicationController
     end
 
 # Before actions
-
-    # 認証済みかどうか確認
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-=begin
-      上記処理を冗長的に記載すると下記になる
-      unless signed_in?
-        flash[:notice] = "Please sign in."
-        redirect_to signin_url
-      end
-=end
-    end
     # Session偽装チェック
     def correct_user
       @user = User.find(params[:id])

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
 	before_save { self.email = email.downcase }
   before_create :create_remember_token
 
@@ -13,6 +14,11 @@ class User < ActiveRecord::Base
   # ランダム文字列生成
   def User.new_remember_token
     SecureRandom.urlsafe_base64
+  end
+
+  def feed
+    # このコードは準備段階
+    Micropost.where("user_id = ?", id)
   end
 
   # 暗号化（SH-1)

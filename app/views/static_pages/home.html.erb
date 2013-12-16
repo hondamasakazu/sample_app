@@ -1,15 +1,32 @@
 <% provide(:title, 'Home') %>
-<div class="center hero-unit">
-  <h1>Welcome to Future-Commynity!!</h1>
-  <h2>
-    we are head for geek team.
-    <%= link_to "Network Solution Group.", root_path %>
-    sample site.
-  </h2>
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/micropost_form' %>
+      </section>
+    </aside>
+    <div class="span8">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
+  <div class="center hero-unit">
+    <h1>Welcome to Future-Commynity!!</h1>
 
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-</div>
+	  <h2>
+	    we are head for geek team.
+	    <%= link_to "Network Solution Group.", root_path %>
+	    sample site.
+	  </h2>
+
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  </div>
+
 <%= link_to image_tag("devops-ninja.jpg", alt: "DevOps",:size => '150x110'), root_path %>
 <%= link_to image_tag("devops-for-drupal.jpg", alt: "DevOps",:size => '150x110'), root_path %>
-
-
+<% end %>
