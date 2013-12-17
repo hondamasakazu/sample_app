@@ -1,7 +1,7 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "一応１４０文字までという制御を入れてます。使いづらいかな。。。。" %>
+    <%= f.text_area :content, placeholder: "一応１４０文字までという制御を入れてます。少ないかな。。。。" %>
     <span class="micro_post_count" id="micro_post_count">0</count>文字入力されました。
   </div>
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
