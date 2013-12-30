@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
 	before_save { self.email = email.downcase }
   before_create :create_remember_token
 
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+	#VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+
+  #フューチャードメインのみ許可
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@fexd.co.jp+\z/i
 	validates :name, presence: true, length: { maximum: 30}
 	validates :email, presence: true,
 		format: { with:VALID_EMAIL_REGEX },

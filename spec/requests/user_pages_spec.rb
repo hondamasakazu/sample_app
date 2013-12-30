@@ -101,7 +101,7 @@ describe "UserPages" do
     describe "認証時に有効なユーザー情報を生成" do
       before do
         fill_in "Name",         with: "Example User"
-        fill_in "Email",        with: "user@example.com"
+        fill_in "Email",        with: "user@fexd.co.jp"
         fill_in "Password",     with: "foobar"
         fill_in "Confirm Password", with: "foobar"
       end
@@ -112,7 +112,7 @@ describe "UserPages" do
 
       describe "ユーザー情報を登録" do
         before { click_button submit }
-        let(:user) { User.find_by(email: 'user@example.com') }
+        let(:user) { User.find_by(email: 'user@fexd.co.jp') }
 
         it { should have_title(user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
@@ -120,7 +120,7 @@ describe "UserPages" do
 
       describe "ユーザーを保存した後のログアウトのリンク等確認" do
         before { click_button submit }
-        let(:user) { User.find_by(email: 'user@example.com') }
+        let(:user) { User.find_by(email: 'user@fexd.co.jp') }
 
         it { should have_link('Sign out') }
         it { should have_title(user.name) }
@@ -156,7 +156,7 @@ describe "UserPages" do
 
     describe "更新処理" do
       let(:new_name)  { "New Name" }
-      let(:new_email) { "new@example.com" }
+      let(:new_email) { "new@fexd.co.jp" }
       before do
         fill_in "Name",             with: new_name
         fill_in "Email",            with: new_email

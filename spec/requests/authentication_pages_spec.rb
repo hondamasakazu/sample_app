@@ -77,7 +77,7 @@ describe "Authentication" do
 
       describe "ユーザー情報の偽装" do
         let(:user) { FactoryGirl.create(:user) }
-        let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+        let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@fexd.co.jp") }
         before { sign_in user, no_capybara: true }
 
         describe "偽装したユーザー情報で編集アクションにGET(取得）リクエストを送信する" do

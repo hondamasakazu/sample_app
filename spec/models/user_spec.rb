@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(name: "Example User", email: "user@example.com",
+  before { @user = User.new(name: "Example User", email: "user@fexd.co.jp",
                         password: "foobar", password_confirmation: "foobar") }
   subject{ @user}
 
@@ -63,7 +63,7 @@ describe User do
 
   describe "Mailフォーマット：正常系" do
     it "should valid" do
-      addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
+      addresses = %w[user@fexd.CO.jp A_US-ER@fexd.co.jp frst.lst@fexd.co.jp a+b@fexd.co.jp]
       addresses.each do |valid_address|
         @user.email = valid_address
         expect(@user).to be_valid
@@ -82,7 +82,7 @@ describe User do
 
   describe "パスワードがブランク" do
     before do
-      @user =  User.new(name: "Example User", email: "user@example.com",
+      @user =  User.new(name: "Example User", email: "user@fexd.co.jp",
                     password: " ", password_confirmation: " ")
     end
     it { should_not be_valid }
@@ -115,7 +115,7 @@ describe User do
   end
 
   describe "アドレスのlower-case保存確認" do
-    let(:mixed_case_email) { "Foo@ExAMPle.coM" }
+    let(:mixed_case_email) { "Foo@FexD.CO.Jp" }
 
     it "should be saved as all lower-case" do
       @user.email = mixed_case_email
