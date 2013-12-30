@@ -21,7 +21,7 @@ module SessionsHelper
 
   # 認証確認
   def signed_in?
-    !current_user.nil?
+    !current_user.nil? && current_user.confirm?
   end
 
   # 成りすましチェック

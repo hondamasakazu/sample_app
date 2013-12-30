@@ -6,6 +6,7 @@ namespace :db do
                  email: "example@fexd.co.jp",
                  password: "foobar",
                  password_confirmation: "foobar",
+                 confirm: true,
                  admin: true)
 
     99.times do |n|
@@ -15,7 +16,8 @@ namespace :db do
       User.create!(name: name,
                    email: email,
                    password: password,
-                   password_confirmation: password)
+                   password_confirmation: password,
+                   confirm: true)
     end
 
     users = User.all(limit: 6)

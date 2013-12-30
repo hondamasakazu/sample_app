@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    # このコードは準備段階
     Micropost.where("user_id = ?", id)
   end
 
