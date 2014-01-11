@@ -1,0 +1,10 @@
+<%# user = @user if user.nil? %>
+<%= form_for(
+	user.relationship_group_users.build(
+			group_id: @group.id),
+			) do |f| %>
+
+  <div><%= f.hidden_field :group_id %></div>
+  <div><%= f.hidden_field :user_id, :value => user.id %></div>
+  <%= f.submit "追加", class: "btn btn-small" %>
+<% end %>
