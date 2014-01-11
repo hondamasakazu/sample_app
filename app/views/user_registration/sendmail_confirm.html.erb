@@ -3,7 +3,7 @@
 <h2>ようこそ、FutureCommynityへ</h2>
 <p>下記リンクよりアカウント登録を完了させてください。</p>
 <p>本登録はこちらから</p>
-<%= url_for(:only_path => false , 
+<%= url_for(:only_path => false ,
 						:controller => "users",
 						:action => "confirm",
 						:confirm_token => @user.remember_token,

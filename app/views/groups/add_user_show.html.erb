@@ -1,0 +1,30 @@
+<% provide(:title, 'ユーザー追加') %>
+<fieldset>
+<legend><strong><%= @group.name %></strong></legend>
+<%= will_paginate @users%>
+	<ul class="users">
+		<% @users.each do |user| %>
+			<li>
+	    	<%= gravatar_for user, size: 52 %>
+	  		<%= link_to user.name, user %>
+				<% if user.join_groups?(@group) %>
+					<%= form_for(user.relationship_group_users.find_by(
+																									group_id: @group.id),
+																									html: { method: :delete }
+																									) do |f| %>
+							<div><%= f.hidden_field :user_id, :value => user.id %></div>
+					  <%= f.submit "削除",class: "btn btn-small" %>
+					<% end %>
+				<% else %>
+		  		<%= form_for(user.relationship_group_users.build(group_id: @group.id)) do |f| %>
+					  <div><%= f.hidden_field :group_id %></div>
+					  <div><%= f.hidden_field :user_id, :value => user.id %></div>
+					  <%= f.submit "追加", class: "btn btn-small" %>
+					<% end %>
+				<% end %>
+
+	  	</li>
+	  <% end %>
+	</ul>
+<%= will_paginate @users%>
+</fieldset>

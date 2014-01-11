@@ -1,0 +1,36 @@
+<% provide(:title, @group.name) %>
+<div class = "row">
+	<aside class = "span4">
+		<section>
+			<fieldset>
+			<legend><strong>・グループ名称</strong></legend>
+			<p><%= @group.name %></p>
+			</fieldset>
+			<fieldset>
+			<legend><strong>・説明</strong></legend>
+			<p><%= @group.comment %></p>
+			<span>
+			  <%= link_to "Edit", edit_group_path %>
+			</span>
+			</fieldset>
+		</section>
+		<section>
+      <% if @users.any? %>
+			<fieldset>
+				<legend><strong>・メンバ一覧</strong></legend>
+        <div class="user_avatars">
+          <% @users.each do |user| %>
+          	<% if user.join_groups?(@group) %>
+            	<%= link_to gravatar_for(user, size: 30), user %>
+            <% end %>
+          <% end %>
+        </div>
+			</fieldset>
+      <% end %>
+			<p><span><%= link_to "メンバーの追加", {action:"add_user_show", id: @group.id} %></span></p>
+		</section>
+	</aside>
+	<div class="span8">
+
+  </div>
+</div>

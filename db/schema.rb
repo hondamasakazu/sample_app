@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230102324) do
+ActiveRecord::Schema.define(version: 20140104091154) do
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "microposts", force: true do |t|
     t.string   "content"
@@ -21,6 +28,17 @@ ActiveRecord::Schema.define(version: 20131230102324) do
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
+
+  create_table "relationship_group_users", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationship_group_users", ["group_id", "user_id"], name: "index_relationship_group_users_on_group_id_and_user_id", unique: true
+  add_index "relationship_group_users", ["group_id"], name: "index_relationship_group_users_on_group_id"
+  add_index "relationship_group_users", ["user_id"], name: "index_relationship_group_users_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

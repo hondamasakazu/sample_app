@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :microposts, dependent: :destroy
+  has_many :relationship_group_users, dependent: :destroy
 	before_save { self.email = email.downcase }
   before_create :create_remember_token
 
@@ -26,6 +27,18 @@ class User < ActiveRecord::Base
   # 暗号化（SH-1)
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def join_groups?(group)
+    self.relationship_group_users.find_by(group_id: group.id)
+  end
+
+  def join_groups!(group)
+    self.relationship_group_users.create!(group_id: group.id)
+  end
+
+  def unjoin_groups!(group)
+    relationship_group_users.find_by(group_id: group.id).destroy
   end
 
   private
