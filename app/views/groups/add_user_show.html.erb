@@ -10,7 +10,7 @@
 		    	<div style="text-align: center; float: left; padding: 0px 10px 0px 10px;height: 80px;">
 		  			<%= link_to user.name, user %>
 		  		</div>
-		  		<div style="text-align: center; float: left;">
+		  		<div id="join_form" style="text-align: center; float: left;">
 						<% if user.join_groups?(@group) %>
 							<%= render 'join_groups', user: user %>
 						<% else %>

@@ -1,8 +1,9 @@
-<%# user = @user if user.nil? %>
+<% user = @user if user.nil? %>
 <%= form_for(
 	user.relationship_group_users.find_by(
 			group_id: @group.id),
-			html: { method: :delete }
+			html: { method: :delete },
+			remote: true
 			) do |f| %>
 		<div><%= f.hidden_field :user_id, :value => user.id %></div>
   <%= f.submit "削除",class: "btn btn-small" %>

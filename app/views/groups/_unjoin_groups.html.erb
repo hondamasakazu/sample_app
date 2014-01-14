@@ -1,7 +1,8 @@
-<%# user = @user if user.nil? %>
+<% user = @user if user.nil? %>
 <%= form_for(
 	user.relationship_group_users.build(
 			group_id: @group.id),
+			remote: true
 			) do |f| %>
 
   <div><%= f.hidden_field :group_id %></div>
