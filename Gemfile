@@ -43,6 +43,10 @@ gem 'jbuilder', '1.0.2'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
+# Markdown
+gem 'redcarpet'
+gem 'coderay'
+
 group :test do
 
   # 振舞駆動テスティングフレームワーク
