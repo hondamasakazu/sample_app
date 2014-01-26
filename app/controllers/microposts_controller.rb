@@ -11,7 +11,7 @@ class MicropostsController < ApplicationController
       redirect_to(:back)
     else
       errors = Array.new
-      flash[:error] = @micropost
+      flash[:micropost_error] = @micropost
       redirect_to(:back)
     end
   end
@@ -40,7 +40,7 @@ class MicropostsController < ApplicationController
       flash[:success] = "ドキュメントをアップロードしました。"
       redirect_to(:back)
     else
-       flash[:error] = @micropost
+       flash[:micropost_error] = @micropost
       redirect_to(:back)
     end
   end

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 			sign_in user
 			redirect_back_or user
 		else
-			flash.now[:error] = 'Invalid email/password combination'
+			flash.now[:error] = 'ログイン認証に失敗しました。入力情報をご確認ください。'
 			render 'new'
 		end
 	end
