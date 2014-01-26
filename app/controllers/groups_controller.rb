@@ -9,6 +9,9 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @users = User.paginate(page: params[:page])
+    @feed_items = current_user.feed_for_group(@group).paginate(page: params[:page])
+    @micropost  = @group.microposts.build
+    session[:group_id] = @group.id
   end
 
   def new
@@ -25,8 +28,7 @@ class GroupsController < ApplicationController
       flash.now[:success] = "Group created!"
       redirect_to @group
     else
-      @feed_items = []
-      render 'static_pages/home'
+      render 'new'
     end
   end
 
@@ -36,8 +38,7 @@ class GroupsController < ApplicationController
       flash.now[:success] = "Group updated"
       redirect_to @group
     else
-      @feed_items = []
-      render 'static_pages/home'
+      render 'edit'
     end
   end
 

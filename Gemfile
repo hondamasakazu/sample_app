@@ -47,6 +47,10 @@ gem 'jbuilder', '1.0.2'
 gem 'redcarpet'
 gem 'coderay'
 
+#Aws
+gem 'aws-s3'
+gem 'aws-sdk'
+
 group :test do
 
   # 振舞駆動テスティングフレームワーク

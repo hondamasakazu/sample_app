@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :microposts, dependent: :destroy
   has_many :relationship_group_users, dependent: :destroy
+  has_many :document_manegers, dependent: :destroy
 	before_save { self.email = email.downcase }
   before_create :create_remember_token
 
@@ -22,6 +23,10 @@ class User < ActiveRecord::Base
 
   def feed
     Micropost.where("user_id = ?", id)
+  end
+
+  def feed_for_group(group)
+    Micropost.where("group_id = ?", group.id)
   end
 
   # 暗号化（SH-1)

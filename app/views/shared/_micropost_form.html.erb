@@ -4,5 +4,11 @@
     <%= f.text_area :content, placeholder: "一応１４０文字までという制御を入れてます。少ないかな。。。。" %>
     <span class="micro_post_count" id="micro_post_count">0</count>文字入力されました。
   </div>
+  <div><%= f.hidden_field :group_id %></div>
   <%= f.submit "ツイート", class: "btn btn-samll btn-primary" %>
+  <%= link_to 'ファイル選択', '#', class: 'open' %>
 <% end %>
+
+<div id="modal" align="left" style="width:80px; display:none; margin-left: 10px; margin-top: 0px; padding-top: 0px;">
+	<%= render 'shared/filepost_form' %>
+</div>

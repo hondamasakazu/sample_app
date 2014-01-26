@@ -4,7 +4,16 @@ module MicropostsHelper
     sanitize(raw(content.split.map{ |s| wrap_long_string(s) }.join(' ')))
   end
 
+  def this_group_name(group_id)
+    group_id.blank? ? "may Acount": get_group_name(group_id)
+  end
+
   private
+
+    def get_group_name(group_id)
+      name = Group.find(group_id).name
+      "#{name} Group よりツイート!"
+    end
 
     def wrap_long_string(text, max_width = 30)
       zero_width_space = "&#8203;"

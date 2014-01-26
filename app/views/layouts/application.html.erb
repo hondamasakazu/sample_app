@@ -3,7 +3,11 @@
 	<head>
 	  <title><%= full_title(yield(:title)) %></title>
 	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css"%>
 	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js' %>
+		<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" %>
+		<%= javascript_include_tag 'groups' %>
 	  <%= csrf_meta_tags %>
 	  <%= render 'layouts/shim' %>
 	</head>
@@ -11,7 +15,20 @@
 		<%= render 'layouts/header' %>
 		<div class="container">
 			<% flash.each do |key, value| %>
-				<%= content_tag(:div, value, class:"alert alert-#{key}") %>
+				<% if key == :error %>
+					  <div id="error_explanation">
+				    <div class="alert alert-error">
+				      The form contains <%= pluralize(value.errors.count, "error") %>.
+				    </div>
+				    <ul>
+				    <% value.errors.full_messages.each do |msg| %>
+				      <li>* <%= msg %></li>
+				    <% end %>
+				    </ul>
+				  </div>
+				<% else %>
+					<%= content_tag(:div, value, class:"alert alert-#{key}") %>
+				<% end %>
 			<% end %>
 			<%= yield %>
 			<%= render 'layouts/footer' %>

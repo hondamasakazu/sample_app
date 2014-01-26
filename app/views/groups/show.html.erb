@@ -16,21 +16,26 @@
 		</section>
 		<section>
       <% if @users.any? %>
-			<fieldset>
-				<legend><strong>・メンバ一覧</strong></legend>
-        <div class="user_avatars">
-          <% @users.each do |user| %>
-          	<% if user.join_groups?(@group) %>
-            	<%= link_to gravatar_for(user, size: 30), user %>
-            <% end %>
-          <% end %>
-        </div>
-			</fieldset>
+				<fieldset>
+					<legend><strong>・メンバ一覧</strong></legend>
+	        <div class="user_avatars">
+	          <% @users.each do |user| %>
+	          	<% if user.join_groups?(@group) %>
+	            	<%= link_to gravatar_for(user, size: 30), user %>
+	            <% end %>
+	          <% end %>
+	        </div>
+				</fieldset>
       <% end %>
 		</section>
 		<p><span><%= link_to "メンバー編集", {action:"add_user_show", id: @group.id} %></span></p>
 	</aside>
-	<div class="span8">
-
+  <div class="span8">
+    <section>
+    	<span><%= current_user.name %></span>
+      <%= render 'shared/micropost_form' %>
+    </section>
+    <%= render 'shared/feed' %>
   </div>
 </div>
+
