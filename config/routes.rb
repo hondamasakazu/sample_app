@@ -14,7 +14,7 @@ SampleApp::Application.routes.draw do
   match '/signout',            to: 'sessions#destroy',      via: 'delete'
   match '/signupconfirm',      to: 'users#confirm',         via: 'get'
   match '/groupadd_user',      to: 'groups#add_user_show',  via: 'get'
-  match '/file_upload',         to: 'microposts#file_upload', via: 'post'
+  match '/file_upload',        to: 'microposts#file_upload', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
