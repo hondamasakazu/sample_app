@@ -1,8 +1,12 @@
 <li>
 	<% if micropost.doc_flg %>
   	<span class="content">
+         添付資料：
       	<%= link_to micropost.file_name, micropost.file_path %>
   	</span>
+    <span class="timestamp">
+      ※ 右クリック => リンク先を別名で保存....ちょっとかっちょ悪い...
+    </span>
 	<% else %>
   	<span class="content"><%= wrap(micropost.content) %></span>
 	<% end %>

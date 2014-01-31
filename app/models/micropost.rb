@@ -7,9 +7,16 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 140 }
   validates :user_id, presence: true
 
+  MAX_FILE_SIZE = 10000000
+
   def post_save
     self.doc_flg = false;
     self.save
+  end
+
+  def doc_save_valid?(file)
+    return "ドキュメントが選択されていません" if file.blank?
+    return "アップロード可能なファイルサイズは10MBまでです。" if file.size < MAX_FILE_SIZE
   end
 
   def doc_save(file)
@@ -29,6 +36,9 @@ class Micropost < ActiveRecord::Base
 
     # ファイルパスの更新
 		update_file_path(s3_objects)
+
+    # 一時ファイル削除
+     File.unlink tmp_file_path
   end
 
   private

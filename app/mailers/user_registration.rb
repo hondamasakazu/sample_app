@@ -9,7 +9,7 @@ class UserRegistration < ActionMailer::Base
   def sendmail_confirm(user)
     @greeting = "こんにちは！#{user.name}"
     @user = user
-    mail(:to => user.email, :subject => "Welcome to My Awesome Site") do |format|
+    mail(:to => user.email, :subject => "ようこそ Network Solution Group へ") do |format|
       format.html
     end
   end

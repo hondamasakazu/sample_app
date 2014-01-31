@@ -21,22 +21,14 @@ class MicropostsController < ApplicationController
     @micropost.group_id = session[:group_id]
     session[:group_id] = nil
 
-    # file_name = params[:upload_file][:doc].original_filename;
-    # @micropost.file_name = file_name
-    # @micropost.file_path = "#{@micropost.id}/#{file_name}"
-    # @micropost.doc_flg = true;
-    # @micropost.content = "document Upoud data"
-    # params[:upload_file][:doc].read # これがドキュメント
-    # バリデートチェック
-    # S3へのアップロード
-    # ファイルパス設定
+    file = params[:upload_file][:doc];
+    error_msg = @micropost.doc_save_valid?(file)
+    if error_msg.present?
+      flash[:error] = error_msg
+      redirect_to(:back)
+    end
 
-    #参考サイト
-    # http://qiita.com/kkabetani/items/d2c72394a490293277cc
-
-    # s3
-    # http://akasata.com/articles/292
-    if @micropost.doc_save(params[:upload_file][:doc])
+    if @micropost.doc_save(file)
       flash[:success] = "ドキュメントをアップロードしました。"
       redirect_to(:back)
     else
@@ -46,6 +38,7 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+  # 画面からファイル削除機能
     @micropost.destroy
     redirect_to(:back)
   end

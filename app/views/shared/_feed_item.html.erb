@@ -1,12 +1,16 @@
 <li id="<%= feed_item.id %>">
-  
+
     <span class="user">
       <%= link_to feed_item.user.name, feed_item.user %>
     </span>
     <% if feed_item.doc_flg %>
       <span class="content">
+        添付資料：
           <%= link_to feed_item.file_name, feed_item.file_path %>
       </span>
+    <span class="timestamp">
+      ※ 右クリック => リンク先を別名で保存....ちょっとかっちょ悪い...
+    </span>
     <% else %>
       <span class="content">
         <%= wrap(markdown(feed_item.content).html_safe) %>
