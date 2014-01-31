@@ -1,4 +1,5 @@
 require 'aws-sdk'
+require 'fileutils'
 
 class Micropost < ActiveRecord::Base
 	belongs_to :user
@@ -16,7 +17,7 @@ class Micropost < ActiveRecord::Base
 
   def doc_save_valid?(file)
     return "ドキュメントが選択されていません" if file.blank?
-    return "アップロード可能なファイルサイズは10MBまでです。" if file.size < MAX_FILE_SIZE
+    return "アップロード可能なファイルサイズは10MBまでです。" if file.size > MAX_FILE_SIZE
   end
 
   def doc_save(file)
@@ -28,27 +29,34 @@ class Micropost < ActiveRecord::Base
     return false unless self.save
 
     # 一時的に、tmpへファイル出力
-    tmp_file_path = "#{Rails.root}/tmp/uploads/" + file_name
-	  create_tmp_file(tmp_file_path, file)
+    file_path = create_tmp_file_path(file)
+	  create_tmp_file(file_path, file)
 
 	  # S3へファイルアップロード
-		s3_objects = s3_file_upload(tmp_file_path)
+		s3_file_path = s3_file_upload(file_path)
 
     # ファイルパスの更新
-		update_file_path(s3_objects)
+		update_file_path(s3_file_path)
 
     # 一時ファイル削除
-     File.unlink tmp_file_path
+    File.unlink file_path
   end
 
   private
-  	def create_tmp_file(tmp_file_path, file)
-		  File.open(tmp_file_path, 'wb') do |of|
+  	def create_tmp_file(file_path, file)
+		  File.open(file_path, 'wb') do |of|
 		    of.write(file.read)
 		  end
   	end
 
-  	def s3_file_upload(tmp_file_path)
+    def create_tmp_file_path(file)
+      time_str = get_now_time_str
+      tmp_file_path = "#{Rails.root}/tmp/uploads/#{time_str}"
+      mkdir_tmp(tmp_file_path)
+      "#{tmp_file_path}/#{file.original_filename}"
+    end
+
+  	def s3_file_upload(file_path)
 			s3 = AWS::S3.new(
 			  :access_key_id     => 'AKIAJIMRA7H56PP7F7UQ',
 			  :secret_access_key => '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',
@@ -56,15 +64,25 @@ class Micropost < ActiveRecord::Base
 
 			micropost = Micropost.find(self.id)
 			bucket = s3.buckets['future-commynity']
-			s3_file_path_tmp = "#{micropost.id}/#{File.basename(tmp_file_path)}"
+      time_str = get_now_time_str
+			s3_file_path_tmp = "#{micropost.id}/#{time_str}/#{File.basename(file_path)}"
 			o = bucket.objects[s3_file_path_tmp]
-			o.write(:file => tmp_file_path, :acl => :public_read)
+			o.write(:file => file_path, :acl => :public_read)
+      s3_file_path_tmp
   	end
 
-  	def update_file_path(s3_objects)
+  	def update_file_path(s3_file_path)
 			micropost = Micropost.find(self.id)
-			s3_file_path = "http://future-commynity.s3-ap-northeast-1.amazonaws.com/#{s3_objects.key}"
+			s3_file_path = "http://future-commynity.s3-ap-northeast-1.amazonaws.com/#{s3_file_path}"
 	    micropost.update_attributes(:file_path => s3_file_path)
   	end
+
+    def get_now_time_str
+      Time.now.instance_eval { '%s%03d' % [strftime('%Y%m%d%H%M%S'), (usec / 1000.0).round] }
+    end
+
+    def mkdir_tmp(path)
+      FileUtils.mkdir_p(path) unless FileTest.exist?(path)
+    end
 
 end

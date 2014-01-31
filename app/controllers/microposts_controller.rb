@@ -25,16 +25,15 @@ class MicropostsController < ApplicationController
     error_msg = @micropost.doc_save_valid?(file)
     if error_msg.present?
       flash[:error] = error_msg
-      redirect_to(:back)
+    else
+      if @micropost.doc_save(file)
+        flash[:success] = "ドキュメントをアップロードしました。"
+      else
+        flash[:micropost_error] = @micropost
+      end
     end
 
-    if @micropost.doc_save(file)
-      flash[:success] = "ドキュメントをアップロードしました。"
-      redirect_to(:back)
-    else
-       flash[:micropost_error] = @micropost
-      redirect_to(:back)
-    end
+    redirect_to(:back)
   end
 
   def destroy
