@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126093520) do
+ActiveRecord::Schema.define(version: 20140203120715) do
 
   create_table "document_manegers", force: true do |t|
     t.integer  "user_id"
@@ -55,6 +55,28 @@ ActiveRecord::Schema.define(version: 20140126093520) do
   add_index "relationship_group_users", ["group_id", "user_id"], name: "index_relationship_group_users_on_group_id_and_user_id", unique: true
   add_index "relationship_group_users", ["group_id"], name: "index_relationship_group_users_on_group_id"
   add_index "relationship_group_users", ["user_id"], name: "index_relationship_group_users_on_user_id"
+
+  create_table "return_office_dates", force: true do |t|
+    t.string   "return_date"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "return_office_members", force: true do |t|
+    t.integer  "return_office_date_id"
+    t.integer  "user_id"
+    t.string   "join_flg"
+    t.string   "remarks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "return_office_members", ["return_office_date_id", "user_id"], name: "re_of_members", unique: true
+  add_index "return_office_members", ["return_office_date_id"], name: "index_return_office_members_on_return_office_date_id"
+  add_index "return_office_members", ["user_id"], name: "index_return_office_members_on_user_id"
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
