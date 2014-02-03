@@ -21,12 +21,11 @@ class MicropostsController < ApplicationController
     @micropost.group_id = session[:group_id]
     session[:group_id] = nil
 
-    file = params[:upload_file][:doc];
-    error_msg = @micropost.doc_save_valid?(file)
+    error_msg = @micropost.doc_save_valid?(params[:upload_file])
     if error_msg.present?
       flash[:error] = error_msg
     else
-      if @micropost.doc_save(file)
+      if @micropost.doc_save(params[:upload_file][:doc])
         flash[:success] = "ドキュメントをアップロードしました。"
       else
         flash[:micropost_error] = @micropost

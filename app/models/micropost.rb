@@ -17,7 +17,7 @@ class Micropost < ActiveRecord::Base
 
   def doc_save_valid?(file)
     return "ドキュメントが選択されていません" if file.blank?
-    return "アップロード可能なファイルサイズは10MBまでです。" if file.size > MAX_FILE_SIZE
+    return "アップロード可能なファイルサイズは10MBまでです。" if file[:doc].size > MAX_FILE_SIZE
   end
 
   def doc_save(file)

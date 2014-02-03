@@ -17,7 +17,7 @@
       </span>
     <% end %>
     <span class="timestamp">
-      Posted <%= time_ago_in_words(feed_item.created_at) %> ago. <%= this_group_name(feed_item.group_id) %>
+      Posted <%= time_ago_in_words(feed_item.created_at) %> 前. <%= this_group_name(feed_item.group_id) %>
     </span>
   <% if current_user?(feed_item.user) %>
     <%= link_to "削除", feed_item, method: :delete,
