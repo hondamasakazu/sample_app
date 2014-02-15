@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :microposts, dependent: :destroy
   has_many :relationship_group_users, dependent: :destroy
-  has_one :return_office_member
+  has_many :return_office_members, dependent: :destroy
 	before_save { self.email = email.downcase }
   before_create :create_remember_token
 

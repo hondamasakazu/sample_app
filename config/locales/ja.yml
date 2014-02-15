@@ -3,6 +3,11 @@ ja:
       content: "コメント"
       name: "名前"
       comment: "コメント"
+      return_date: "帰社日"
+      start_time: "開始時間"
+      end_time: "終了時間"
+      location: "場所"
+      remarks: "備考"
   date:
     abbr_day_names:
     - 日

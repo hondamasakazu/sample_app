@@ -1,24 +1,23 @@
 <% provide(:title, 'ユーザー追加') %>
 <fieldset>
-	<legend><strong><%= @group.name %></strong></legend>
-	<div style="text-align: center;">
+	<legend><strong><%= link_to @group.name , @group %></strong></legend>
+	<div style="text-align: left;">
 		<%= will_paginate @users%>
+			<ul class="users">
 				<% @users.each do |user| %>
-					<div style="text-align: center; float: left; padding: 0px 20px 0px 30px;">
+					<li>
 		    		<%= gravatar_for user, size: 52 %>
-		    	</div>
-		    	<div style="text-align: center; float: left; padding: 0px 10px 0px 10px;height: 80px;">
 		  			<%= link_to user.name, user %>
-		  		</div>
-		  		<div id="join_form" style="text-align: center; float: left;">
-						<% if user.join_groups?(@group) %>
-							<%= render 'join_groups', user: user %>
-						<% else %>
-							<%= render 'unjoin_groups', user: user %>
-						<% end %>
-					</div>
+		  			<div id="join_form_<%= user.id %>" style="text-align: left;">
+							<% if user.join_groups?(@group) %>
+								<%= render 'join_groups', user: user %>
+							<% else %>
+								<%= render 'unjoin_groups', user: user %>
+							<% end %>
+						</div>
+					</li>
 			  <% end %>
-		</div>
+			</ul>
 		<%= will_paginate @users%>
 	<div>
 </fieldset>

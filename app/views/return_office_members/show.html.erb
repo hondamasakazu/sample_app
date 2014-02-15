@@ -1,0 +1,32 @@
+<% provide(:title, '帰社日') %>
+<h1>帰社日</h1>
+<%= render @return_office_members %>
+<table class="coder">
+	<tr>
+		<th colspan="3" class="coder_head">
+			帰社日時 <%= @return_office_date.return_date %>
+			<%= @return_office_date.start_time %>時〜
+			@<%= @return_office_date.location %>
+		</th>
+	</tr>
+	<tr align="center">
+		<th class="coder_label_name">名前</th>
+		<th class="coder_label_join">出欠席</th>
+		<th class="coder_label_remarks">備考</th>
+	</tr>
+		<% @return_office_members.each do |f| %>
+		<tr align="center">
+			<td><%= get_user_name(f.user_id) %></td>
+			<td><%= join_flg_display(f.join_flg) %></td>
+			<td><%= f.remarks %></td>
+		</tr>
+		<% end %>
+	<tr align="center">
+		<th colspan="2">出席者数</th>
+		<th><%= @return_office_join_cnt %>名</th>
+	</tr>
+	<tr align="center">
+		<th colspan="2">欠席者数</th>
+		<th><%= @return_office_unjoin_cnt %>名</th>
+	</tr>
+</table>

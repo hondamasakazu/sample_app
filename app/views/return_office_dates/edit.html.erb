@@ -1,0 +1,14 @@
+<% provide(:title, "帰社日情報の更新") %>
+<h1>帰社日情報の更新</h1>
+
+<div class="row">
+  <div class="span6 offset5">
+    <%= form_for(@return_office_date) do |f| %>
+    <div class="return_office_dates">
+      <%= render 'fields', f: f %>
+      <%= render 'shared/error_messages', object: f.object %></br>
+      <%= f.submit "保存", class: "btn btn-small btn-primary" %>
+    </div>
+    <% end %>
+  </div>
+</div>

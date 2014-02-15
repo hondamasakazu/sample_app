@@ -29,6 +29,10 @@ module SessionsHelper
     user == current_user
   end
 
+  def current_user_id?(user_id)
+    user_id == current_user.id
+  end
+
   # 認証済みかどうか確認
   def signed_in_user
     unless signed_in?

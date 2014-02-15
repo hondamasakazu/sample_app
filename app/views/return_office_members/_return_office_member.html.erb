@@ -1,0 +1,9 @@
+<% if current_user_id?(return_office_member.user_id) %>
+	<ul class="users">
+			<% if return_office_member.join_flg == "true" %>
+					<li id="join_return_office"><%= render 'join_return_office', return_office_member: return_office_member %></li>
+			<% else %>
+					<li id="unjoin_return_office"><%= render 'unjoin_return_office', return_office_member: return_office_member %></li>
+			<% end %>
+	</ul>
+<% end %>

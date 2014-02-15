@@ -219,3 +219,159 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+.return_office_dates {
+  select  {
+    width: 100px;
+  }
+  input {
+    width: 200px;
+  }
+}
+
+/* --------------------------------------------------
+   coder Table
+-------------------------------------------------- */
+.coder {
+    border-spacing: 0;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+         -o-border-radius: 6px;
+            border-radius: 6px;
+    box-shadow: 0 1px 1px #CCC;
+    width: 100%;
+}
+.coder th,
+.coder td {
+    padding:10px;
+    background:#FFF;
+    border-bottom:solid 1px #CCC;
+    border-right:solid 1px #CCC;
+}
+.coder th {
+    background:#e3dcd5;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    color:#69655c;
+}
+
+/* -----------------------
+  左上角丸 最初の行の最初のセル
+----------------------- */
+.coder tr:first-child th:first-child,
+.coder tr:first-child td:first-child {
+    -webkit-border-radius: 6px 0 0 0;
+       -moz-border-radius: 6px 0 0 0;
+         -o-border-radius: 6px 0 0 0;
+            border-radius: 6px 0 0 0;
+}
+/* -----------------------
+  右上角丸 最初の行の最後のセル
+----------------------- */
+.coder tr:first-child th:last-child,
+.coder tr:first-child td:last-child {
+    -webkit-border-radius: 0 6px 0 0;
+       -moz-border-radius: 0 6px 0 0;
+         -o-border-radius: 0 6px 0 0;
+            border-radius: 0 6px 0 0;
+}
+/* -----------------------
+  左下角丸 最後の行の最初のセル
+----------------------- */
+.coder tr:last-child th:first-child,
+.coder tr:last-child td:first-child {
+    -webkit-border-radius: 0 0 0 6px;
+       -moz-border-radius: 0 0 0 6px;
+         -o-border-radius: 0 0 0 6px;
+            border-radius: 0 0 0 6px;
+}
+/* -----------------------
+  右下角丸 最後の行の最後のセル
+----------------------- */
+.coder tr:last-child th:last-child,
+.coder tr:last-child td:last-child {
+    -webkit-border-radius: 0 0 6px 0;
+       -moz-border-radius: 0 0 6px 0;
+         -o-border-radius: 0 0 6px 0;
+            border-radius: 0 0 6px 0;
+}
+/* --------------------------------------------
+  thaed,tbodyを使う場合の設定
+-------------------------------------------- */
+.coder thead th {background:#e3dcd5;}
+.coder thead+tbody th {background:#f4ede6;}
+
+/* -----------------------
+  左上角丸 thead内 最初の行の最初のセル
+----------------------- */
+.coder thead tr:first-child th:first-child,
+.coder thead tr:first-child td:first-child {
+    -webkit-border-radius: 6px 0 0 0;
+       -moz-border-radius: 6px 0 0 0;
+         -o-border-radius: 6px 0 0 0;
+            border-radius: 6px 0 0 0;
+}
+
+/* -----------------------
+  右上角丸 thead内 最初の行の最後のセル
+----------------------- */
+.coder thead tr:first-child th:last-child,
+.coder thead tr:first-child td:last-child {
+    -webkit-border-radius: 0 6px 0 0;
+       -moz-border-radius: 0 6px 0 0;
+         -o-border-radius: 0 6px 0 0;
+            border-radius: 0 6px 0 0;
+}
+
+/* -----------------------
+  角丸なし thaedの後のtbody 最初の行の最初のセル
+  角丸なし thaedの後のtbody 最初の行の最後のセル
+----------------------- */
+.coder thead+tbody tr:first-child th:first-child,
+.coder thead+tbody tr:first-child td:first-child,
+.coder thead+tbody tr:first-child th:last-child,
+.coder thead+tbody tr:first-child td:last-child {
+    -webkit-border-radius:0px;
+       -moz-border-radius:0px;
+         -o-border-radius:0px;
+            border-radius:0px;
+}
+
+/* -----------------------
+  左下角丸 thaedの後のtbody 最後の行の最初のセル
+----------------------- */
+.coder thead+tbody tr:last-child th:first-child,
+.coder thead+tbody tr:last-child td:first-child {
+    -webkit-border-radius: 0 0 0 6px;
+       -moz-border-radius: 0 0 0 6px;
+         -o-border-radius: 0 0 0 6px;
+            border-radius: 0 0 0 6px;
+}
+
+/* -----------------------
+  右下角丸 thaedの後のtbody 最後の行の最後のセル
+----------------------- */
+.coder thead+tbody tr:last-child th:last-child,
+.coder thead+tbody tr:last-child td:last-child {
+    -webkit-border-radius: 0 0 6px 0;
+       -moz-border-radius: 0 0 6px 0;
+         -o-border-radius: 0 0 6px 0;
+            border-radius: 0 0 6px 0;
+}
+
+.coder_head {
+  text-align:center;
+  width: 100%;
+}
+
+.coder_label_name {
+  width: 20%;
+}
+
+.coder_label_join {
+  width: 20%;
+}
+
+.coder_label_remarks {
+  width: 60%;
+}

@@ -1,6 +1,11 @@
 SampleApp::Application.routes.draw do
+  get "return_office_members/new"
+  get "return_office_dates/new"
   resources :groups
   resources :users
+  resources :groups
+  resources :return_office_dates, except: [:show]
+  resources :return_office_members
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationship_group_users, only: [:create, :destroy]

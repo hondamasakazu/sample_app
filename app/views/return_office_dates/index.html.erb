@@ -1,0 +1,10 @@
+<% provide(:title, '帰社日一覧') %>
+<h1>帰社日一覧</h1>
+
+<%= will_paginate %>
+
+<ul class="return_office_dates">
+  <%= render @return_office_dates %>
+</ul>
+
+<%= will_paginate %>

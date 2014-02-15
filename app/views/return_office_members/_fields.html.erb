@@ -1,0 +1,10 @@
+  <%= f.label :return_date%>
+  <%= f.text_field :return_date %>
+  <%= f.label :start_time %>
+  <%= f.select :start_time , @select_time, :selected => @return_office_date.start_time%>
+  <%= f.select :start_min , @select_min, :selected => @return_office_date.start_min %>
+  <%= f.label :end_time %>
+  <%= f.select :end_time, @select_time, :selected => @return_office_date.end_time %>
+  <%= f.select :end_min , @select_min, :selected => @return_office_date.end_min %>
+  <%= f.label :location %>
+  <%= f.text_area :location %>

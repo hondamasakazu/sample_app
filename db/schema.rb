@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203120715) do
+ActiveRecord::Schema.define(version: 20140205134205) do
 
   create_table "document_manegers", force: true do |t|
     t.integer  "user_id"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20140203120715) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "start_min"
+    t.string   "end_min"
   end
 
   create_table "return_office_members", force: true do |t|

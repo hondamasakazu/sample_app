@@ -1,1 +1,1 @@
-$("#join_form").html("<%= escape_javascript(render('groups/join_groups')) %>")
+$("#join_form_<%= @user.id %>").html("<%= escape_javascript(render('groups/join_groups')) %>")

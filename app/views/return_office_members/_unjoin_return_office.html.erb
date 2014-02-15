@@ -1,0 +1,9 @@
+<%= form_for(
+	current_user.return_office_members.find_by(
+			return_office_date_id: @return_office_date.id)
+			) do |f| %>
+  <%= f.submit "出席", class: "btn btn-small" %>
+  <%= f.text_area :remarks %>
+  <%= f.hidden_field :join_flg, :value => true %>
+  <%= f.hidden_field :user_id %>
+<% end %>
