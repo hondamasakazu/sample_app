@@ -1,6 +1,7 @@
 <li>
 	<% if current_user.admin? %>
-  	<%= link_to return_office_date.return_date + " 編集", edit_return_office_date_path(return_office_date.id) %>
+		<%= return_office_date.return_date %>
+  	| <%= link_to " 編集", edit_return_office_date_path(return_office_date.id) %>
   <% end %>
     | <%= link_to " 出欠", return_office_member_path(return_office_date.id) %>
   <% if current_user.admin? %>
