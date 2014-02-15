@@ -4,7 +4,7 @@
   <% end %>
   <%= link_to return_office_date.return_date + " 出欠", return_office_member_path(return_office_date.id) %>
   <% if current_user.admin? %>
-    | <%= link_to "削除", group, method: :delete,
+    | <%= link_to "削除", return_office_date, method: :delete,
                                   data: { confirm: "削除しますか?" } %>
   <% end %>
 </li>
