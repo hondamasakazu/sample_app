@@ -6,6 +6,19 @@
 				<%= gravatar_for @user, size: 40 %>
 				<%= @user.name %>
 			</h1>
+			<fieldset>
+			<p><%= @user.email %></p>
+			</fieldset>
+			<fieldset>
+			<legend><strong>所属チーム</strong></legend>
+		  <ul class="groups">
+		    <% @user.join_groups.each do |f| %>
+		  	<li>
+			  	 <%= link_to f.group.name, f.group %>
+		  	</li>
+		    <% end %>
+			</ul>
+			</fieldset>
 		</section>
 	</aside>
 	<div class="span8">

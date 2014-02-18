@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     self.relationship_group_users.find_by(group_id: group.id)
   end
 
+  def join_groups
+    relationship_group_users = self.relationship_group_users
+  end
+
   def join_groups!(group)
     self.relationship_group_users.create!(group_id: group.id)
   end
