@@ -1,0 +1,14 @@
+<% provide(:title, 'Create Doc Mg') %>
+<h1>ドキュメント管理項目の作成</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+
+    <%= form_for(@document_management) do |f| %>
+      <%= render 'fields', f: f %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.submit "作成", class: "btn btn-samll btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

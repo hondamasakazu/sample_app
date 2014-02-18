@@ -1,0 +1,10 @@
+<% provide(:title, 'All Documents') %>
+<h1>ドキュメント一覧</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @documents %>
+</ul>
+
+<%= will_paginate %>

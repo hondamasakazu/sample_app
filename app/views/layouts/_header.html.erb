@@ -39,6 +39,15 @@
                 <li><%= link_to "帰社日の追加", new_return_office_date_path %></li>
               </ul>
             </li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                ドキュメント管理 <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "ドキュメント管理一覧", document_managements_path %></li>
+                <li><%= link_to "ドキュメント管理の追加", new_document_management_path %></li>
+              </ul>
+            </li>
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>
           <% end %>

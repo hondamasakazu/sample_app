@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205134205) do
+ActiveRecord::Schema.define(version: 20140218105915) do
+
+  create_table "document_managements", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "document_manegers", force: true do |t|
     t.integer  "user_id"
@@ -24,6 +30,16 @@ ActiveRecord::Schema.define(version: 20140205134205) do
 
   add_index "document_manegers", ["group_id"], name: "index_document_manegers_on_group_id"
   add_index "document_manegers", ["user_id"], name: "index_document_manegers_on_user_id"
+
+  create_table "documents", force: true do |t|
+    t.integer  "document_management_id"
+    t.string   "file_path"
+    t.string   "file_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "documents", ["document_management_id"], name: "index_documents_on_document_management_id"
 
   create_table "groups", force: true do |t|
     t.string   "name"

@@ -1,0 +1,15 @@
+<li>
+  <%= link_to document_management.name, document_path(document_management.id) %>
+  <% if current_user.admin? %>
+    | <%= link_to "削除", group, method: :delete,
+                                  data: { confirm: "削除しますか?" } %>
+  <% end %>
+  <ul class="groups">
+    <% document_management.find_doc.each do |f| %>
+  	<li>
+	  	 <%= link_to f.file_name, f.file_path %>
+  	</li>
+    <% end %>
+	</ul>
+</li>
+<br/>

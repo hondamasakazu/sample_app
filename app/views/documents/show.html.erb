@@ -1,0 +1,28 @@
+<% provide(:title, @document_management.name) %>
+<div class = "row">
+	<aside class = "span2">
+	</aside>
+  <div class="span8">
+		<section>
+			<fieldset>
+			<legend>
+				<strong>ドキュメント管理名 : <%= @document_management.name %></strong>
+			</legend>
+			</fieldset>
+		</section>
+    <section>
+    	<span><%= link_to 'ファイル選択', '#', class: 'open' %></span>
+			<div id="modal" align="left" style="width:80px; display:none; margin-left: 10px; margin-top: 0px; padding-top: 0px;">
+				<%= form_tag('/upload', :multipart => true) do %>
+				  <br/>
+				  <p style="font-size: 0.7em; margin-top: 1px; margin-bottom: 5px;">
+				  	<%= file_field "upload_file", "doc", "size" => 60 %>
+				  </p>
+				  <p style="font-size: 0.7em; margin-top: 0px; margin-bottom: 0px;">
+				  	<%= submit_tag 'アップロード', class: "btn btn-samll btn-primary" %>
+				  </p>
+				<% end %>
+			</div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<% provide(:title, 'All DocMng') %>
+<h1>ドキュメント管理一覧</h1>
+
+<%= will_paginate %>
+
+<ul class="groups">
+  <%= render @document_managements %>
+</ul>
+
+<%= will_paginate %>
