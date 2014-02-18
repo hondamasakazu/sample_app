@@ -1,7 +1,7 @@
 <li>
   <%= link_to document_management.name, document_path(document_management.id) %>
   <% if current_user.admin? %>
-    | <%= link_to "削除", group, method: :delete,
+    | <%= link_to "削除", document_management, method: :delete,
                                   data: { confirm: "削除しますか?" } %>
   <% end %>
   <ul class="groups">
