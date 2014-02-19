@@ -6,8 +6,14 @@
 				<%= gravatar_for @user, size: 40 %>
 				<%= @user.name %>
 			</h1>
+			<br/>
 			<fieldset>
-			<p><%= @user.email %></p>
+			<font size="2">性別：<%= @user.sex_name %></font>
+			<p ><font size="2"><%= @user.email %></font></p>
+			</fieldset>
+			<fieldset>
+			<legend><strong>趣味</strong></legend>
+				<%= @user.hobby %>
 			</fieldset>
 			<fieldset>
 			<legend><strong>所属チーム</strong></legend>

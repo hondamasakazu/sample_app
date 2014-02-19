@@ -4,8 +4,13 @@
   <%= f.label :email %>
   <%= f.text_field :email %>
 
+  <%= f.label :sex %>
+	<%= f.select :sex , @sex, :selected => @user.sex , class: "sex_select"%>
+  <%= f.label :hobby %>
+  <%= f.text_area :hobby %>
+
   <%= f.label :password %>
   <%= f.password_field :password %>
 
-  <%= f.label :password_confirmation, "Confirm Password" %>
+  <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>

@@ -18,10 +18,12 @@ class UsersController < ApplicationController
   # アカウント登録画面表示
   def new
     @user = User.new
+    @sex = [["男性","M"],["女性","F"]]
   end
 
   # ユーザー情報編集画面表示
   def edit
+    @sex = [["男性","M"],["女性","F"]]
   end
 
   # アカウント作成
@@ -31,7 +33,6 @@ class UsersController < ApplicationController
       # sign_in @user # ユーザトークン発行と保存
       UserRegistration.sendmail_confirm(@user).deliver
       render 'confirm'
-      #redirect_to @user
     else
       render 'new'
     end
@@ -72,8 +73,8 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:name, :email, :sex, :hobby,
+                                   :password, :password_confirmation)
     end
 
 # Before actions

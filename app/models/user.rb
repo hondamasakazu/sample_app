@@ -50,6 +50,9 @@ class User < ActiveRecord::Base
     relationship_group_users.find_by(group_id: group.id).destroy
   end
 
+  def sex_name
+    self.sex == "M" ? "男" : "女"
+  end
   private
     # ユーザートークンを生成
     def create_remember_token

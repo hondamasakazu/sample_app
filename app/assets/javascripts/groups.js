@@ -13,6 +13,8 @@ function setEventHandler() {
 function modalOpen() {
   $('#modal').dialog({
       modal: true,
-      title: 'UpLoad!!'
+      width:'500',
+      show:'slide',
+      title: 'ファイルアップロード'
   });
 }

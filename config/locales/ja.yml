@@ -8,6 +8,10 @@ ja:
       end_time: "終了時間"
       location: "場所"
       remarks: "備考"
+      sex: "性別"
+      hobby: "趣味"
+      password: "パスワード"
+      password_confirmation: "パスワード確認"
   date:
     abbr_day_names:
     - 日
