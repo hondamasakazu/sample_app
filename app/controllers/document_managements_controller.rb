@@ -18,7 +18,7 @@ class DocumentManagementsController < ApplicationController
   def create
     @document_management = DocumentManagement.new(document_management_params)
     if @document_management.save
-      flash.now[:success] = "DocumentManagement created!"
+      flash[:success] = "DocumentManagement created!"
       redirect_to document_managements_url
     else
       render 'new'
@@ -28,7 +28,7 @@ class DocumentManagementsController < ApplicationController
   def update
     @document_management= DocumentManagement.find(params[:id])
     if @document_management.update_attributes(document_management_params)
-      flash.now[:success] = "DocumentManagement updated"
+      flash[:success] = "DocumentManagement updated"
       redirect_to document_managements_url
     else
       render 'edit'

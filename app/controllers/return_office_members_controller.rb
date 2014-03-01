@@ -10,7 +10,7 @@ class ReturnOfficeMembersController < ApplicationController
   def update
     @return_office_member = ReturnOfficeMember.find(params[:id])
     @return_office_member.update_attributes(update_params)
-    flash.now[:success] = "Profile updated"
+    flash[:success] = "Profile updated"
     redirect_to return_office_member_url(@return_office_member.return_office_date_id)
   end
 

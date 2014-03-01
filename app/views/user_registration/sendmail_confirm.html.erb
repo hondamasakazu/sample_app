@@ -6,6 +6,5 @@
 <%= url_for(:only_path => false ,
 						:controller => "users",
 						:action => "confirm",
-						:confirm_token => @user.remember_token,
-						:pass => @user.password
+						:confirm_token => @user.remember_token
 						) %>

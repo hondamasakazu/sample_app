@@ -23,8 +23,8 @@ SampleApp::Application.configure do
     :port => '587',
     :domain => 'smtp.gmail.com',
     :authentication => 'plain',
-    :user_name => 'rubytest123456@gmail.com',
-    :password => 'kogane5513'
+    :user_name => 'xxxxxxxxxxx',
+    :password => 'xxxxxxxxxxx'
   }
 
   # Print deprecation notices to the Rails logger.

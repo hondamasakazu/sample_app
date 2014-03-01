@@ -30,37 +30,34 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # sign_in @user # ユーザトークン発行と保存
       UserRegistration.sendmail_confirm(@user).deliver
       render 'confirm'
     else
       render 'new'
+      @sex = [["男性","M"],["女性","F"]]
     end
   end
 
   def confirm
-    # ここの処理ちょー微妙かも。。。。パスをURLに付けた。これはセキュリティー上NG!
-    # 後々、パスワードは再度入力してもらってから更新する処理へ変更する！
     @user = User.find_by(remember_token: params[:confirm_token])
-    @user.password = params[:pass];
-    @user.password_confirmation = params[:pass];
-    @user.confirm = true
-    if @user.save
+    if @user.update_attribute(:confirm, true)
       sign_in @user # ユーザトークン発行と保存
-      flash.now[:success] = "Welcome to the FutureCommynity!"
+      flash[:success] = "Welcome to the FutureCommynity!"
       redirect_to @user
     else
       render 'new'
+      @sex = [["男性","M"],["女性","F"]]
     end
   end
 
   # ユーザー情報更新
   def update
     if @user.update_attributes(user_params)
-      flash.now[:success] = "Profile updated"
+      flash.now[:success] = "プロフィールを更新しました。"
       redirect_to @user # @userを解析し、'/users/:id'にリダイレクト
     else
       render 'edit'
+      @sex = [["男性","M"],["女性","F"]]
     end
   end
 
