@@ -1,0 +1,17 @@
+$ bundle exec rspec spec/
+
+$ bundle exec rake db:reset
+bundle exec rake db:migrate
+$ bundle exec rake db:populate
+$ bundle exec rake test:prepare
+
+$ git push
+$ git push heroku
+$ heroku pg:reset DATABASE
+$ heroku run rake db:migrate
+$ heroku run rake db:populate
+
+$ git add .
+$ git commit -m "Finish user signup"
+$ git checkout master
+$ git merge sign-up

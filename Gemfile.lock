@@ -311,6 +311,7 @@ DEPENDENCIES
   hirb-unicode
   jbuilder (= 1.0.2)
   jquery-rails (= 3.0.4)
+  mime-types
   newrelic_rpm
   pg (= 0.15.1)
   pry

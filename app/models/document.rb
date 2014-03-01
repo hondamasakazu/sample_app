@@ -17,38 +17,35 @@ class Document < ActiveRecord::Base
     return false unless self.save
 
     # 一時的に、tmpへファイル出力
-    file_path = create_tmp_file_path(file)
-	  create_tmp_file(file_path, file)
+    download_file_path = create_tmp_file(file)
 
 	  # S3へファイルアップロード
-		s3_file_path = s3_file_upload(file_path)
+		# s3_file_path = s3_file_upload(file_path)
 
     # ファイルパスの更新
-		update_file_path(s3_file_path)
+		update_file_path(download_file_path)
 
     # 一時ファイル削除
-    File.unlink file_path
+    # File.unlink file_path
   end
 
   private
-  	def create_tmp_file(file_path, file)
+  	def create_tmp_file(file)
+      time_str = get_now_time_str
+      tmp_file_path = "#{Rails.root}/public/uploads/#{time_str}"
+      file_path = "#{tmp_file_path}/#{file.original_filename}"
+      mkdir_tmp(tmp_file_path)
 		  File.open(file_path, 'wb') do |of|
 		    of.write(file.read)
 		  end
+      download_file_path = "/public/uploads/#{time_str}/#{file.original_filename}"
   	end
-
-    def create_tmp_file_path(file)
-      time_str = get_now_time_str
-      tmp_file_path = "#{Rails.root}/tmp/uploads/#{time_str}"
-      mkdir_tmp(tmp_file_path)
-      "#{tmp_file_path}/#{file.original_filename}"
-    end
 
   	def s3_file_upload(file_path)
 			s3 = AWS::S3.new(
-			  :access_key_id     => 'AKIAJIMRA7H56PP7F7UQ',
-			  :secret_access_key => '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',
-			  :s3_endpoint       => 's3-ap-northeast-1.amazonaws.com')
+			  :access_key_id     => '',
+			  :secret_access_key => '',
+			  :s3_endpoint       => '')
 
 			bucket = s3.buckets['future-commynity']
       time_str = get_now_time_str
@@ -58,9 +55,9 @@ class Document < ActiveRecord::Base
       s3_file_path_tmp
   	end
 
-  	def update_file_path(s3_file_path)
-			s3_file_path = "http://future-commynity.s3-ap-northeast-1.amazonaws.com/#{s3_file_path}"
-	    self.update_attributes(:file_path => s3_file_path)
+  	def update_file_path(file_path)
+			# s3_file_path = "http://xxxxxxxx.xxxxxxxx.amazonaws.com/#{s3_file_path}"
+	    self.update_attributes(:file_path => file_path)
   	end
 
     def get_now_time_str

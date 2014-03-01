@@ -35,14 +35,23 @@ class MicropostsController < ApplicationController
     redirect_to(:back)
   end
 
+  def file_download
+      @document = Micropost.find(params[:id])
+      file_path = "#{Rails.root}#{@document.file_path}"
+      stat = File::stat(file_path)
+      file_name = File.basename(file_path)
+
+      send_file(file_path, :filename => filename_for_content_disposition(file_name),
+                                      :type => detect_content_type(file_path),
+                                      :disposition => 'attachment')
+  end
+
   def destroy
-  # 画面からファイル削除機能
     @micropost.destroy
     redirect_to(:back)
   end
 
   private
-
     def micropost_params
       params.require(:micropost).permit(:content, :group_id)
     end
@@ -51,4 +60,13 @@ class MicropostsController < ApplicationController
       @micropost = current_user.microposts.find_by(id: params[:id]) # findだとデータがない場合、Exceptipnとなってしまう
       redirect_to root_url if @micropost.nil?
     end
+
+    def filename_for_content_disposition(name)
+      request.env['HTTP_USER_AGENT'] =~ %r{MSIE} ? ERB::Util.url_encode(name) : name
+    end
+
+    def detect_content_type(path)
+      MIME::Types.type_for(path)[0].to_s
+    end
+
 end

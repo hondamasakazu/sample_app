@@ -2,7 +2,7 @@
 	<% if micropost.doc_flg %>
   	<span class="content">
          添付資料：
-      	<%= link_to micropost.file_name, micropost.file_path %>
+      	<%= link_to micropost.file_name, file_download_path(id: micropost.id) %>
   	</span>
 	<% else %>
   	<span class="content"><%= wrap(micropost.content) %></span>

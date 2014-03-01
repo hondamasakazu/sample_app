@@ -7,7 +7,7 @@
   <ul class="groups">
     <% document_management.find_doc.each do |f| %>
   	<li>
-	  	 <%= link_to f.file_name, f.file_path %>
+	  	 <%= link_to f.file_name, download_path(id: f.id) %>
   	</li>
     <% end %>
 	</ul>

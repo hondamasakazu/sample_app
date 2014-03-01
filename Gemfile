@@ -48,6 +48,9 @@ gem 'jbuilder', '1.0.2'
 gem 'redcarpet'
 gem 'coderay'
 
+#content_type
+gem 'mime-types'
+
 #Aws
 gem 'aws-s3'
 gem 'aws-sdk'

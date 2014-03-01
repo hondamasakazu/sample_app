@@ -6,7 +6,7 @@
     <% if feed_item.doc_flg %>
       <span class="content">
         添付資料：
-          <%= link_to feed_item.file_name, feed_item.file_path %>
+          <%= link_to feed_item.file_name, file_download_path(id: feed_item.id) %>
       </span>
     <% else %>
       <span class="content">
