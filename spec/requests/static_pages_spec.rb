@@ -25,25 +25,17 @@ describe "Static pages" do
       end
     end
 
-    describe "count micropost" do
+    describe "count microposts" do
       let(:user) { FactoryGirl.create(:user) }
       before do
+        FactoryGirl.create(:micropost, user: user, content: "ほげほげ")
         FactoryGirl.create(:micropost, user: user, content: "ほげほげ")
         sign_in user
         visit root_path
       end
-
-      it { should have_content("#{user.microposts.count} micropost") }
-      describe "count microposts" do
-        before do
-          FactoryGirl.create(:micropost, user: user, content: "ほげほげ")
-          FactoryGirl.create(:micropost, user: user, content: "ほげほげ")
-          sign_in user
-          visit root_path
-        end
-        it { should have_content("#{user.microposts.count} microposts") }
-      end
+      it { should have_content("#{user.microposts.count} post") }
     end
+
     describe "pagination" do
       let(:user) { FactoryGirl.create(:user) }
       before do
@@ -54,7 +46,7 @@ describe "Static pages" do
 
       it { should have_selector('div.pagination') }
 
-      it "各icropost表示" do
+      it "各Micropost表示" do
         user.feed.paginate(page: 1).each do |micropost|
           expect(page).to have_selector('li', text: micropost.content)
         end
@@ -69,11 +61,11 @@ describe "Static pages" do
         sign_in user
         visit root_path
       end
-      it { should have_link('delete') }
+      it { should have_link('削除') }
 
       describe "カレントユーザー以外は削除リンクなし" do
         let(:otheruser) { FactoryGirl.create(:user) }
-        it { should_not have_link('delete', href: user_path(otheruser)) }
+        it { should_not have_link('削除', href: user_path(otheruser)) }
       end
     end
 

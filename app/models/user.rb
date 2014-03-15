@@ -34,12 +34,16 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
-  def join_groups?(group)
+  def join_group(group)
     self.relationship_group_users.find_by(group_id: group.id)
   end
 
+  def join_groups?(group)
+    self.relationship_group_users.exists?(group_id: group.id)
+  end
+
   def join_groups
-    relationship_group_users = self.relationship_group_users
+    self.relationship_group_users.map{|rgu| Group.find_by(rgu.group_id)}
   end
 
   def join_groups!(group)

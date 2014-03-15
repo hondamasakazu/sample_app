@@ -12,7 +12,7 @@ describe "UserPages" do
     end
 
     it { should have_title('All users') }
-    it { should have_content('All users') }
+    it { should have_content('ユーザ一覧') }
 
     describe "pagination" do
 
@@ -34,7 +34,7 @@ describe "UserPages" do
         sign_in user
         visit users_path
       end
-      it { should_not have_link('delete') }
+      it { should_not have_link('削除') }
 
       describe "Adminユーザーで認証" do
         let(:admin) { FactoryGirl.create(:admin) }
@@ -43,13 +43,13 @@ describe "UserPages" do
           visit users_path
         end
 
-        it { should have_link('delete', href: user_path(User.first)) }
+        it { should have_link('削除', href: user_path(User.first)) }
         it "Adminユーザーでユーザー削除確認" do
           expect do
-            click_link('delete', match: :first)
+            click_link('削除', match: :first)
           end.to change(User, :count).by(-1)
         end
-        it { should_not have_link('delete', href: user_path(admin)) }
+        it { should_not have_link('削除', href: user_path(admin)) }
       end
     end
   end
@@ -57,8 +57,8 @@ describe "UserPages" do
   describe "signup page" do
   	before { visit signup_path }
 
-	it { should have_content('Sign up') }
-  it { should have_button("Create my account") }
+	it { should have_content('アカウント情報入力') }
+  it { should have_button("アカウント作成") }
 	it { should have_title(full_title('Sign up')) }
   end
 
@@ -84,7 +84,7 @@ describe "UserPages" do
   describe "ログイン" do
 
     before { visit signup_path }
-    let(:submit) { "Create my account" }
+    let(:submit) { "アカウント作成" }
 
     describe "無効なユーザー情報（ブランク）を送信" do
       it "情報が登録されていないことを確認" do
@@ -100,10 +100,10 @@ describe "UserPages" do
 
     describe "認証時に有効なユーザー情報を生成" do
       before do
-        fill_in "Name",         with: "Example User"
+        fill_in "名前",         with: "Example User"
         fill_in "Email",        with: "user@fexd.co.jp"
-        fill_in "Password",     with: "foobar"
-        fill_in "Confirm Password", with: "foobar"
+        fill_in "パスワード",     with: "foobar"
+        fill_in "パスワード確認", with: "foobar"
       end
 
       it "ユーザー情報を登録" do
@@ -112,24 +112,7 @@ describe "UserPages" do
 
       describe "ユーザー情報を登録" do
         before { click_button submit }
-        let(:user) { User.find_by(email: 'user@fexd.co.jp') }
-
-        it { should have_title(user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-      end
-
-      describe "ユーザーを保存した後のログアウトのリンク等確認" do
-        before { click_button submit }
-        let(:user) { User.find_by(email: 'user@fexd.co.jp') }
-
-        it { should have_link('Sign out') }
-        it { should have_title(user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-
-        describe "ログアウト" do
-          before { click_link "Sign out" }
-          it { should have_link('Sign in') }
-        end
+        it { should have_title("ユーザー登録完了") }
       end
     end
   end
@@ -142,7 +125,7 @@ describe "UserPages" do
     end
 
     describe "page" do
-      it { should have_content("Update your profile") }
+      it { should have_content("アカウント編集") }
       it { should have_title("Edit user") }
       it { should have_button("Save changes") }
       it { should have_link('change', href: 'http://gravatar.com/emails') }
@@ -158,16 +141,16 @@ describe "UserPages" do
       let(:new_name)  { "New Name" }
       let(:new_email) { "new@fexd.co.jp" }
       before do
-        fill_in "Name",             with: new_name
-        fill_in "Email",            with: new_email
-        fill_in "Password",         with: user.password
-        fill_in "Confirm Password", with: user.password
+        fill_in "名前",             with: new_name
+        fill_in "Email",           with: new_email
+        fill_in "パスワード",        with: user.password
+        fill_in "パスワード確認",     with: user.password
         click_button "Save changes"
       end
 
       it { should have_title(new_name) }
       it { should have_selector('div.alert.alert-success') }
-      it { should have_link('Sign out', href: signout_path) }
+      it { should have_link('ログアウト', href: signout_path) }
       specify { expect(user.reload.name).to  eq new_name }
       specify { expect(user.reload.email).to eq new_email }
     end

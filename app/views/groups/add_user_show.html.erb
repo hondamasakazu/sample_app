@@ -9,7 +9,7 @@
 		    		<%= gravatar_for user, size: 52 %>
 		  			<%= link_to user.name, user %>
 		  			<div id="join_form_<%= user.id %>" style="text-align: left;">
-							<% if user.join_groups?(@group) %>
+							<% if user.join_group(@group) %>
 								<%= render 'join_groups', user: user %>
 							<% else %>
 								<%= render 'unjoin_groups', user: user %>

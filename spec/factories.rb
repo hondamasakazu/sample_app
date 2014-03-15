@@ -12,7 +12,13 @@ FactoryGirl.define do
   end
 
   factory :micropost do
-    sequence(:content)  { |n| "コメント #{n}" }
+    sequence(:content)  { |n| "コンテンツ #{n}" }
     user
   end
+
+  factory :group do
+    sequence(:name)  { |n| "GroupName #{n}" }
+    sequence(:comment)  { |n| "コメント #{n}" }
+  end
+
 end

@@ -22,7 +22,7 @@
 					<legend><strong>・メンバ一覧</strong></legend>
 	        <div class="user_avatars">
 	          <% @users.each do |user| %>
-	          	<% if user.join_groups?(@group) %>
+	          	<% if user.join_group(@group) %>
 	            	<%= link_to gravatar_for(user, size: 30), user %>
 	            <% end %>
 	          <% end %>

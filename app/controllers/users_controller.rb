@@ -33,8 +33,8 @@ class UsersController < ApplicationController
       UserRegistration.sendmail_confirm(@user).deliver
       render 'confirm'
     else
-      render 'new'
       @sex = [["男性","M"],["女性","F"]]
+      render 'new'
     end
   end
 
@@ -45,19 +45,19 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to the FutureCommynity!"
       redirect_to @user
     else
-      render 'new'
       @sex = [["男性","M"],["女性","F"]]
+      render 'new'
     end
   end
 
   # ユーザー情報更新
   def update
     if @user.update_attributes(user_params)
-      flash.now[:success] = "プロフィールを更新しました。"
+      flash[:success] = "プロフィールを更新しました。"
       redirect_to @user # @userを解析し、'/users/:id'にリダイレクト
     else
-      render 'edit'
       @sex = [["男性","M"],["女性","F"]]
+      render 'edit'
     end
   end
 
