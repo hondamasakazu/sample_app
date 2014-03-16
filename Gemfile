@@ -33,7 +33,7 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
@@ -58,6 +58,7 @@ gem 'mime-types'
 gem 'aws-s3'
 gem 'aws-sdk'
 
+#NewRelic
 gem 'newrelic_rpm'
 
 group :test do
