@@ -39,7 +39,10 @@ gem 'jbuilder', '1.0.2'
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+
+# プロセス起動
+gem 'foreman'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -54,6 +57,8 @@ gem 'mime-types'
 #Aws
 gem 'aws-s3'
 gem 'aws-sdk'
+
+gem 'newrelic_rpm'
 
 group :test do
 
@@ -136,5 +141,4 @@ end
 group :production do
   gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
-  gem 'newrelic_rpm'
 end
