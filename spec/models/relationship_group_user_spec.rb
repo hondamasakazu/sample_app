@@ -41,13 +41,12 @@ describe RelationshipGroupUser do
 			  its(:user) { should eq user }
 			  its(:group) { should eq group_etc }
 			  it { should be_valid }
-
 			  describe "un join" do
 					before do
 				  	user.unjoin_groups!(group_etc)
 					end
 					subject { user }
-				  its(:join_groups) { should include(group_etc) }
+				  its(:join_groups) { should_not include(group_etc) }
 			  end
 		  end
 	  end

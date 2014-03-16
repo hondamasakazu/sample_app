@@ -18,9 +18,9 @@
 			<fieldset>
 			<legend><strong>所属チーム</strong></legend>
 		  <ul class="groups">
-		    <% @user.join_groups.each do |f| %>
+		    <% @user.join_groups.each do |group| %>
 		  	<li>
-			  	 <%= link_to f.group.name, f.group %>
+			  	 <%= link_to group.name, group %>
 		  	</li>
 		    <% end %>
 			</ul>

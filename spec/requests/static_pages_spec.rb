@@ -39,6 +39,21 @@ describe "Static pages" do
     describe "pagination" do
       let(:user) { FactoryGirl.create(:user) }
       before do
+        30.times { FactoryGirl.create(:micropost, user: user) }
+        sign_in user
+        visit root_path
+      end
+
+      it "各Micropost表示" do
+        user.feed.paginate(page: 1).each do |micropost|
+          expect(page).to have_selector('li', text: micropost.content)
+        end
+      end
+    end
+
+    describe "pagination" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
         31.times { FactoryGirl.create(:micropost, user: user) }
         sign_in user
         visit root_path
@@ -46,11 +61,6 @@ describe "Static pages" do
 
       it { should have_selector('div.pagination') }
 
-      it "各Micropost表示" do
-        user.feed.paginate(page: 1).each do |micropost|
-          expect(page).to have_selector('li', text: micropost.content)
-        end
-      end
     end
 
     describe "delete links" do

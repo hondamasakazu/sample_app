@@ -19,18 +19,6 @@ ActiveRecord::Schema.define(version: 20140219132055) do
     t.datetime "updated_at"
   end
 
-  create_table "document_manegers", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.string   "file_path"
-    t.string   "file_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "document_manegers", ["group_id"], name: "index_document_manegers_on_group_id"
-  add_index "document_manegers", ["user_id"], name: "index_document_manegers_on_user_id"
-
   create_table "documents", force: true do |t|
     t.integer  "document_management_id"
     t.string   "file_path"
@@ -39,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140219132055) do
     t.datetime "updated_at"
   end
 
-  add_index "documents", ["document_management_id"], name: "index_documents_on_document_management_id"
+  add_index "documents", ["document_management_id"], name: "index_documents_on_document_management_id", using: :btree
 
   create_table "groups", force: true do |t|
     t.string   "name"
@@ -53,13 +41,13 @@ ActiveRecord::Schema.define(version: 20140219132055) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "group_id"
+    t.integer  "group_id"
     t.string   "file_path"
     t.string   "file_name"
     t.boolean  "doc_flg"
   end
 
-  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
 
   create_table "relationship_group_users", force: true do |t|
     t.integer  "group_id"
@@ -68,9 +56,9 @@ ActiveRecord::Schema.define(version: 20140219132055) do
     t.datetime "updated_at"
   end
 
-  add_index "relationship_group_users", ["group_id", "user_id"], name: "index_relationship_group_users_on_group_id_and_user_id", unique: true
-  add_index "relationship_group_users", ["group_id"], name: "index_relationship_group_users_on_group_id"
-  add_index "relationship_group_users", ["user_id"], name: "index_relationship_group_users_on_user_id"
+  add_index "relationship_group_users", ["group_id", "user_id"], name: "index_relationship_group_users_on_group_id_and_user_id", unique: true, using: :btree
+  add_index "relationship_group_users", ["group_id"], name: "index_relationship_group_users_on_group_id", using: :btree
+  add_index "relationship_group_users", ["user_id"], name: "index_relationship_group_users_on_user_id", using: :btree
 
   create_table "return_office_dates", force: true do |t|
     t.string   "return_date"
@@ -92,9 +80,9 @@ ActiveRecord::Schema.define(version: 20140219132055) do
     t.datetime "updated_at"
   end
 
-  add_index "return_office_members", ["return_office_date_id", "user_id"], name: "re_of_members", unique: true
-  add_index "return_office_members", ["return_office_date_id"], name: "index_return_office_members_on_return_office_date_id"
-  add_index "return_office_members", ["user_id"], name: "index_return_office_members_on_user_id"
+  add_index "return_office_members", ["return_office_date_id", "user_id"], name: "re_of_members", unique: true, using: :btree
+  add_index "return_office_members", ["return_office_date_id"], name: "index_return_office_members_on_return_office_date_id", using: :btree
+  add_index "return_office_members", ["user_id"], name: "index_return_office_members_on_user_id", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -103,8 +91,8 @@ ActiveRecord::Schema.define(version: 20140219132055) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -119,7 +107,7 @@ ActiveRecord::Schema.define(version: 20140219132055) do
     t.string   "sex"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end

@@ -100,8 +100,8 @@ describe "UserPages" do
 
     describe "認証時に有効なユーザー情報を生成" do
       before do
-        fill_in "名前",         with: "Example User"
-        fill_in "Email",        with: "user@fexd.co.jp"
+        fill_in "名前",         with: "Test User"
+        fill_in "Email",        with: "Test@fexd.co.jp"
         fill_in "パスワード",     with: "foobar"
         fill_in "パスワード確認", with: "foobar"
       end
@@ -111,7 +111,13 @@ describe "UserPages" do
       end
 
       describe "ユーザー情報を登録" do
-        before { click_button submit }
+        before do
+          fill_in "名前",         with: "Test User"
+          fill_in "Email",        with: "Test@fexd.co.jp"
+          fill_in "パスワード",     with: "foobar"
+          fill_in "パスワード確認", with: "foobar"
+          click_button submit
+        end
         it { should have_title("ユーザー登録完了") }
       end
     end

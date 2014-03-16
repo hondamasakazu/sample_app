@@ -123,7 +123,7 @@ group :test, :development do
   # 不要なログを出力させない（静的コンテンツへのGetリクエスト等）
   gem 'quiet_assets'
   # 開発用DB
-  gem 'sqlite3'
+  gem 'mysql2'
 
 end
 
