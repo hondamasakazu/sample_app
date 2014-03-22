@@ -26,6 +26,9 @@ if ENV['RAILS_ENV'] == "development"
   app_path = '/var/www/capistrano.test'
   app_shared_path = "#{app_path}/shared"
   worker_processes 5
+  # 実態は symlink。SIGUSR2 を送った時にこの symlink に対して
+  # Unicorn のインスタンスが立ち上がる
+  working_directory "#{app_path}/current/"
   listen            "#{app_shared_path}/tmp/sockets/unicorn.sock"
   pid               "#{app_shared_path}/tmp/pids/unicorn.pid"
   stdout_path       "#{app_shared_path}/log/unicorn.stdout.log"
@@ -47,9 +50,6 @@ if ENV['RAILS_ENV'] == "development"
   after_fork do |server, worker|
     defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
   end
-
-
-
 
 end
 
