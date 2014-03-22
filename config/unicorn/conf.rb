@@ -23,8 +23,8 @@ if ENV['RAILS_ENV'] == "development"
   # stderr_path "#{app_shared_path}/log/unicorn.stderr.log"
 
 
-  app_path = '/var/www/capistrano.test'
-  app_shared_path = "#{app_path}/shared"
+  app_path + '/var/www/capistrano.test'
+  app_shared_path + "#{app_path}/shared"
   worker_processes 5
   # 実態は symlink。
   # SIGUSR2 を送った時にこの symlink に対して
