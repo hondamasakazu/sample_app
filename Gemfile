@@ -44,9 +44,6 @@ gem 'unicorn'
 # プロセス起動
 gem 'foreman'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
 # Markdown
 gem 'redcarpet'
 gem 'coderay'
@@ -130,6 +127,12 @@ group :test, :development do
   gem 'quiet_assets'
   # 開発用DB
   gem 'mysql2'
+
+  # デプロイツール
+  gem 'capistrano', :require => false
+  gem 'capistrano-rails', :require => false
+  gem 'capistrano-rbenv', :require => false
+  gem 'capistrano-bundler', :require => false
 
 end
 
