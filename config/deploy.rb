@@ -29,31 +29,10 @@ set :use_sudo, false #=> defaultではtrue
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-namespace :local do
-  task :update do
-    run_locally do
-      execute "git pull origin master"
-    end
-  end
-end
-
 namespace :deploy do
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'unicorn:restart'
-    end
+    invoke 'unicorn:restart'
   end
-
-  # after :publishing, :restart
-  after 'deploy:publishing', 'deploy:restart'
-
-#  after :restart, :clear_cache do
-#    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-#    end
-#  end
 end
+after 'deploy:publishing', 'deploy:restart'
